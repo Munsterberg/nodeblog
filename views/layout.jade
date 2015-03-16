@@ -1,7 +1,21 @@
-doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+include ./includes/head.jade
+
+body
+  #wrap
+    .container
+      h1 Jake's Node Blog
+      p.lead Test blog using node.js
+      block page
+      block header
+      div
+        // include includes/menu
+      div
+        .content
+          block content
+        block footer
+          footer
+            .container
+              p
+                | Copyright blah blah blah
+
+include ./includes/foot.jade

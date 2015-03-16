@@ -11,10 +11,12 @@
     "debug": "~2.1.1",
     "express": "~4.12.2",
     "jade": "~1.9.2",
+    "mocha": "^2.2.1",
     "mongodb": "^1.4.34",
     "mongoskin": "^1.4.12",
     "morgan": "~1.5.1",
     "node-compass": "0.2.3",
-    "serve-favicon": "~2.2.0"
+    "serve-favicon": "~2.2.0",
+    "superagent": "^1.0.0"
   }
 }
