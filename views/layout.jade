@@ -3,19 +3,16 @@ include ./includes/head.jade
 body
   #wrap
     .container
-      h1 Jake's Node Blog
-      p.lead Test blog using node.js
+      h1 Jake's Personal Blog
+      p.lead Created using node.js
       block page
       block header
-      div
-        // include includes/menu
-      div
-        .content
-          block content
-        block footer
-          footer
-            .container
-              p
-                | Copyright blah blah blah
+        div
+          include includes/menu
+          block alert
+            div.alert.alert-warning.hidden
+
+            .content
+              block content
 
 include ./includes/foot.jade
