@@ -13,7 +13,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// var session = require('express-session');
+var session = require('express-session');
 
 
 var routes = require('./routes/index');
@@ -54,7 +54,7 @@ app.get('/articles/:slug', routes.article.show);
 app.get('/api/articles', routes.article.list);
 app.post('/api/articles', routes.article.add);
 app.put('/api/articles/:id', routes.article.edit);
-app.del('/api/articles/:id', routes.article.del);
+app.delete('/api/articles/:id', routes.article.del);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
