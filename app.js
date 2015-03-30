@@ -42,19 +42,45 @@ app.use(cookieParser());
 app.use(require('node-compass')({mode: 'expanded'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// other middleware
+app.use(cookieParser('3CCC4ACD-6ED1-4844-9217-82131BDCB239'));
+app.use(session({secret: '2C44774A-D649-4D44-9535-46E296EF984F'}));
+
+// Authentication middleware
+app.use(function(req, res, next) {
+    if(req.session && req.session.admin)
+        res.locals.admin = true;
+    next();
+});
+
+// Authorization middleware
+var authorize = function(req, res, next) {
+    if(req.session && req.session.admin)
+        return next();
+    else
+        return res.send(401);
+};
+
+// routes
 app.get('/', routes.index);
 app.get('/login', routes.user.login);
 app.post('/login', routes.user.authenticate);
 app.get('/logout', routes.user.logout);
-app.get('/admin', routes.article.admin);
-app.get('/post', routes.article.post);
-app.post('/post', routes.article.postArticle);
+app.get('/admin', authorize, routes.article.admin);
+app.get('/post', authorize, routes.article.post);
+app.post('/post', authorize, routes.article.postArticle);
 app.get('/articles/:slug', routes.article.show);
 
+
+// REST API ROUTES
+app.all('/api', authorize);
 app.get('/api/articles', routes.article.list);
 app.post('/api/articles', routes.article.add);
 app.put('/api/articles/:id', routes.article.edit);
 app.delete('/api/articles/:id', routes.article.del);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
