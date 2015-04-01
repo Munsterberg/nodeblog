@@ -43,8 +43,8 @@ app.use(require('node-compass')({mode: 'expanded'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // other middleware
-app.use(cookieParser('3CCC4ACD-6ED1-4844-9217-82131BDCB239'));
-app.use(session({secret: '2C44774A-D649-4D44-9535-46E296EF984F'}));
+app.use(cookieParser('3CCC4ACD-6ED1-4844-9217-81133BECB239'));
+app.use(session({secret: '2C44774A-D649-4D44-D635-46E296EF984F'}));
 
 // Authentication middleware
 app.use(function(req, res, next) {
