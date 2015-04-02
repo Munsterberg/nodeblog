@@ -26,7 +26,7 @@ everyauth.facebook
   .findOrCreateUser( function(session, accessToken, accessTokExtra, fbUserMetadata) {
     var promise = this.Promise();
     process.nextTick(function () {
-      if (fbUserMetadata.first_name === 'Jake') {
+      if (fbUserMetadatadata.first_name === 'Jake') {
         session.user = fbUserMetadata;
         session.admin = true;
       }
