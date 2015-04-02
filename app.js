@@ -14,10 +14,36 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var everyauth = require('everyauth'),
+    connect = require('connect');
 
+everyauth.facebook
+  .appId('1629916353906748')
+  .appSecret('38bbceef1fe40cd1f52dc5bf54ff0d7b')
+  .handleAuthCallbackError( function(req, res) {
+
+  })
+  .findOrCreateUser( function(session, accessToken, accessTokExtra, fbUserMetadata) {
+    var promise = this.Promise();
+    process.nextTick(function () {
+      if (fbUserMetadata.first_name === 'Jake') {
+        session.user = fbUserMetadata;
+        session.admin = true;
+      }
+      promise.fulfill(fbUserMetadata);
+    })
+    return promise;
+  })
+  .redirectPath('/admin');
+
+everyauth.everymodule.handleLogout(routes.user.logout);
+
+everyauth.everymodule.findUserById( function(user, callback) {
+  callback(user);
+});
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var users = require('./routes/user');
 
 var app = express();
 app.locals.appTitle = 'Jake Blog';
@@ -45,6 +71,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // other middleware
 app.use(cookieParser('3CCC4ACD-6ED1-4844-9217-81133BECB239'));
 app.use(session({secret: '2C44774A-D649-4D44-D635-46E296EF984F'}));
+app.use(everyauth.middleware());
+
 
 // Authentication middleware
 app.use(function(req, res, next) {

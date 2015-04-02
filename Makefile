@@ -1,0 +1,6 @@
+start:
+	TWITTER_CONSUMER_KEY= ABCABC \
+	TWITTER_CONSUMER_SECRET=XYZXYZXYZ \
+	node app
+
+.PHONY: test db start

@@ -21,6 +21,7 @@ exports.login = function(req, res, next) {
  */
 
 exports.logout = function(req, res, next) {
+  req.session.destroy();
   res.redirect('/');
 };
 
@@ -32,7 +33,7 @@ exports.logout = function(req, res, next) {
 exports.authenticate = function(req, res, next) {
     if(!req.body.email || !req.body.password)
         return res.render('login', {
-            error: 'Your email or password is incorrect!'
+            error: 'Please enter your email and password!'
         });
     req.collections.users.findOne({
         email: req.body.email,
@@ -45,3 +46,4 @@ exports.authenticate = function(req, res, next) {
         res.redirect('/admin');
     })
 };
+
