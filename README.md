@@ -2,4 +2,6 @@
 
 A small toy CMS created with Nodejs.
 
-Passport integration, MongoDB, Jade, and more neat features.
+Everyauth integration, MongoDB, Jade, and more neat features.
+
+* Project has been Abandonded 
